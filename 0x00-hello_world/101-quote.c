@@ -3,7 +3,7 @@
 
 /**
  *
- *  * main - This should successfully print out the text
+ * main - This should successfully print out the text
  *
  * Return: 1 if there are no errors
  */
