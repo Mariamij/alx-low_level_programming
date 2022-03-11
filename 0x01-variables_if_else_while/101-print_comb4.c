@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 /**
- *
  * main - Entry point
  *
  * Return: Always 0 (Success)
@@ -35,7 +34,7 @@ int main(void)
 													}
 			else if ((j < 56) && (y == 57))
 			{
- 			y = 1 + ++j;
+				y = 1 + ++j;
 			}
 			else
 			{
