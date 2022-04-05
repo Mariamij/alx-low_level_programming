@@ -1,47 +1,74 @@
 #include "main.h"
 #include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+
 /**
- * strtow - split strings into words
- * @str: string to split
- * Return: pointer to an array of words
+ * wrdcnt - counts the number of words in a string
+ * @s: string
+ * Return: int of number of words
+ */
+int wrdcnt(char *s)
+{
+	int i, n = 0;
+
+	for (i = 0; s[i]; i++)
+	{
+		if (s[i] == ' ')
+		{
+			if (s[i + 1] != ' ' && s[i + 1] != '\0')
+				n++;
+		}
+		else if (i == 0)
+			n++;
+	}
+	n++;
+	return (n);
+}
+
+/**
+ * strtow - splits a string into words
+ * @str: string
+ * Return: pointer to an array of strings
  */
 char **strtow(char *str)
 {
-	int loc, i, size, j;
-	char *space = " ";
-	char **arr;
+	int i, j, k, l, n = 0, ch = 0;
+	char **x;
 
-	/* loop through str and if ! isspace chk = 1, if chk = 0 all spaces */
-	if (str == NULL || *str == '\0' || strlen(str) == 1)
+	if (str == NULL || *str == '\0')
 		return (NULL);
-
-	arr = malloc(sizeof(char *));
-	if (arr == NULL)
+	n = wrdcnt(str);
+	if (n == 1)
 		return (NULL);
-	size = strlen(str);
-
-	/* strcspn() finds first occurance of ' ' in str */
-	for (i = 0, j = 0; i < size; ++i)
+	x = (char **)malloc(n * sizeof(char *));
+	if (x == NULL)
+		return (NULL);
+	x[n - 1] = NULL;
+	i = 0;
+	while (str[i])
 	{
-		loc = strcspn(str + i, space);
-		if (loc > 0)
+		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
 		{
-			arr[j] = malloc(loc + 1);
-			strncpy(arr[j], str + i, loc);
-			strcat(arr[j], "\0");
-			i += loc;
-			++j;
-			arr = realloc(arr, sizeof(char *) * (j + 1));
+			for (j = 1; str[i + j] != ' ' && str[i + j]; j++)
+				;
+			j++;
+			x[ch] = (char *)malloc(j * sizeof(char));
+			j--;
+			if (x[ch] == NULL)
+			{
+				for (k = 0; k < ch; k++)
+					free(x[k]);
+				free(x[n - 1]);
+					free(x);
+					return (NULL);
+			}
+			for (l = 0; l < j; l++)
+				x[ch][l] = str[i + l];
+			x[ch][l] = '\0';
+			ch++;
+			i += j;
 		}
 		else
-			continue;
+			i++;
 	}
-	/* str check for all spaces */
-	if (j == 0)
-		return (NULL);
-	/* end in NULL */
-	arr[j + 1] = '\0';
-	return (arr);
+	return (x);
 }
