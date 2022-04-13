@@ -10,5 +10,7 @@
  */
 void print_name_as_is(char *name, void (*f)(char *))
 {
-	printf("Hello, my name is %s\n", name);
+	if (!name || !f)
+		return;
+	f(name);
 }
