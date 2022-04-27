@@ -33,8 +33,13 @@ listint_t *find_listint_loop(listint_t *head)
 			return (tortoise);
 		}
 
+<<<<<<< HEAD
 			tortoise = tortoise->next;
 			hare = (hare->next)->next;
+=======
+		tortoise = tortoise->next;
+		hare = (hare->next)->next;
+>>>>>>> 46963f698988b4f57aa81a9c1db27eb06986f593
 	}
 
 	return (NULL);
