@@ -34,18 +34,19 @@ int main(int argc, char *argv[])
 		}
 	}
 	if (r < 0)
+	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-	exit(98);
-}
-a = close(fd_r);
-b = close(fd_w);
-if (a < 0 || b < 0)
-{
-	if (a < 0)
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_r);
-	if (b < 0)
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_w);
-	exit(100);
-}
-return (0);
+		exit(98);
+	}
+	a = close(fd_r);
+	b = close(fd_w);
+	if (a < 0 || b < 0)
+	{
+		if (a < 0)
+			dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_r);
+		if (b < 0)
+			dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_w);
+		exit(100);
+	}
+	return (0);
 }
